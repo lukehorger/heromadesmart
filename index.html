@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hero Made Smart</title>
+<meta name="description" content="Train to remember 20 things in a row, in 30 days. Learn the memory champions' method and how IQ-style puzzles work. 15 minutes a day, with ranks and XP.">
+<link rel="canonical" href="https://heromadesmart.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Hero Made Smart">
+<meta property="og:url" content="https://heromadesmart.com/">
+<meta property="og:title" content="Hero Made Smart">
+<meta property="og:description" content="Train to remember 20 things in a row, in 30 days. Join the waitlist.">
+<meta property="og:image" content="https://heromadesmart.com/img/share-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Hero Made Smart: Train to remember 20 things in a row, in 30 days. A glowing neon room with silly objects at numbered spots.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Hero Made Smart">
+<meta name="twitter:description" content="Train to remember 20 things in a row, in 30 days. Join the waitlist.">
+<meta name="twitter:image" content="https://heromadesmart.com/img/share-1200x630.jpg">
+<meta name="twitter:image:alt" content="Hero Made Smart: Train to remember 20 things in a row, in 30 days.">
+<meta name="theme-color" content="#03061a">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/icon-192.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="preload" href="fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+  /* Geist, self-hosted (one variable file covers weights 400 to 800). */
+  @font-face {
+    font-family: "Geist";
+    src: url(fonts/geist-latin.woff2) format("woff2");
+    font-weight: 400 800;
+    font-style: normal;
+    font-display: swap;
+  }
+  :root {
+    --bg: #03061a;
+    --panel: #0a1030;
+    --line: #1d2a5c;
+    --blue: #3b82f6;
+    --sky: #93c5fd;
+    --text: #e8eeff;
+    --muted: #9fb0d8;
+  }
+  * { box-sizing: border-box; }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.55 "Geist", system-ui, -apple-system, sans-serif;
+  }
+  a { color: var(--sky); }
+  :focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; }
+
+  header { position: absolute; top: 0; left: 0; right: 0; z-index: 2; }
+  header .wrap { display: flex; align-items: center; gap: 10px; padding-top: 18px; }
+  header img { width: 36px; height: 36px; border-radius: 8px; }
+  .wordmark { font-weight: 800; letter-spacing: 0.08em; font-size: 15px; }
+  .wordmark span { color: var(--sky); }
+
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex;
+    align-items: center;
+    background: url(img/hero-wide.jpg) center right / cover no-repeat;
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(90deg, rgba(3,6,26,0.96) 0%, rgba(3,6,26,0.82) 40%, rgba(3,6,26,0.15) 75%);
+  }
+  .hero .wrap { position: relative; width: 100%; padding-top: 90px; padding-bottom: 60px; }
+  .hero-copy { max-width: 520px; }
+  h1 { font-size: clamp(36px, 6vw, 60px); line-height: 1.05; margin: 0 0 18px; font-weight: 800; }
+  h1 em { font-style: normal; color: var(--sky); text-shadow: 0 0 24px rgba(59,130,246,0.7); }
+  .sub { font-size: 19px; color: var(--muted); margin: 0 0 26px; }
+  .btn {
+    display: inline-block;
+    background: #2563eb;
+    color: #fff;
+    font-family: inherit;
+    font-weight: 600;
+    line-height: 1.2;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 999px;
+    border: 0;
+    font-size: 17px;
+    cursor: pointer;
+    box-shadow: 0 0 24px rgba(59,130,246,0.55);
+  }
+  .btn:hover { background: #1d4ed8; }
+  .honest-line { margin-top: 18px; font-size: 15px; color: var(--sky); }
+
+  section { padding: 72px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: clamp(26px, 4vw, 36px); line-height: 1.15; margin: 0 0 12px; }
+  h3 { line-height: 1.25; }
+  .lead { color: var(--muted); max-width: 640px; margin: 0 0 36px; }
+
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+  }
+  .card img { width: 100%; border-radius: 12px; display: block; margin-bottom: 14px; aspect-ratio: 1 / 1; object-fit: cover; }
+  .card h3 { margin: 0 0 6px; font-size: 20px; }
+  .card p { margin: 0; color: var(--muted); font-size: 16px; }
+  .num { color: var(--sky); font-weight: 800; }
+
+  .ranks { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+  .ranks img { width: calc((100% - 60px) / 6); min-width: 80px; border-radius: 12px; }
+
+  .founder { display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: center; }
+  .founder video, .founder .placeholder {
+    width: 100%; aspect-ratio: 9 / 16; max-height: 560px; object-fit: cover;
+    border-radius: 18px; border: 1px solid var(--line); background: var(--panel);
+  }
+  .placeholder { display: flex; align-items: center; justify-content: center; color: var(--muted); text-align: center; padding: 20px; }
+
+  .promise { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .promise ul { margin: 0; padding-left: 20px; }
+  .promise li { margin: 6px 0; color: var(--muted); }
+  .promise h3 { margin: 0 0 10px; }
+
+  form { display: grid; gap: 18px; max-width: 560px; }
+  label.field { display: grid; gap: 6px; font-weight: 600; }
+  input[type=email], input[type=text] {
+    font: inherit; color: var(--text);
+    background: var(--panel); border: 1px solid #4b5f9f; border-radius: 12px;
+    padding: 12px 14px; min-height: 48px;
+  }
+  input::placeholder { color: #7f8db5; opacity: 1; }
+  input:focus { outline: 2px solid var(--blue); outline-offset: 1px; }
+  input[type=radio], input[type=checkbox] { width: 22px; height: 22px; margin: 0; flex: none; accent-color: var(--blue); }
+  fieldset { border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px 14px; margin: 0; }
+  legend { font-weight: 600; padding: 0 6px; }
+  .opts { display: flex; flex-wrap: wrap; gap: 0 22px; }
+  .opts label { display: flex; gap: 10px; align-items: center; min-height: 44px; color: var(--muted); font-weight: 400; cursor: pointer; }
+  .check { display: flex; gap: 10px; align-items: center; min-height: 44px; color: var(--muted); cursor: pointer; }
+  .hp { position: absolute; left: -9999px; }
+  .small { font-size: 14px; color: var(--muted); }
+  #status { min-height: 24px; font-weight: 600; }
+  #status.ok { color: #86efac; }
+  #status.err { color: #fca5a5; }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
+  footer .tag { color: var(--text); font-weight: 600; }
+  footer a, .small a { padding: 10px 2px; }
+
+  @media (max-width: 760px) {
+    body { font-size: 16px; }
+    .hero { background-image: url(img/hero-tall.jpg); background-position: center bottom; min-height: 100vh; align-items: flex-start; }
+    .hero::before { background: linear-gradient(180deg, rgba(3,6,26,0.97) 0%, rgba(3,6,26,0.85) 38%, rgba(3,6,26,0.1) 70%); }
+    .hero .wrap { padding-top: 84px; }
+    .steps, .founder, .promise { grid-template-columns: 1fr; }
+    .ranks img { width: calc((100% - 24px) / 3); min-width: 0; }
+    .founder video { max-width: 320px; justify-self: center; }
+    .founder .placeholder { aspect-ratio: auto; min-height: 120px; }
+    section { padding: 52px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <img src="img/logo.png" alt="">
+    <div class="wordmark">HERO MADE <span>SMART</span></div>
+  </div>
+</header>
+
+<main>
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <h1>Train to remember <em>20 things</em> in a row, in 30 days.</h1>
+      <p class="sub">Learn the memory champions' method and how IQ-style puzzles work. 15 minutes a day, with ranks and XP.</p>
+      <a class="btn" href="#join">Join the waitlist</a>
+      <p class="honest-line">We don't promise IQ points. We promise skills you can prove.</p>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p class="lead">Short daily sessions. A starting test on day 1, called the Mind Trial, and a fair retest on day 30 with brand-new items.</p>
+    <div class="steps">
+      <div class="card">
+        <img src="img/hero-tall.jpg" alt="A glowing room with a rubber duck, a melting clock, a pineapple in sunglasses, a flaming guitar, pancakes and a giant key placed at numbered spots">
+        <h3><span class="num">1.</span> Build a memory palace</h3>
+        <p>Place silly, vivid pictures along a path through a room you know. Walk the path, and the list comes back in order.</p>
+      </div>
+      <div class="card">
+        <img src="img/puzzle.jpg" alt="A 3 by 3 grid puzzle of circles, triangles and squares with one cell missing and four answer choices">
+        <h3><span class="num">2.</span> Learn the puzzle rules</h3>
+        <p>Grid puzzles, number series, odd-one-out. Most use a few simple rules. Learn them and stop freezing up.</p>
+      </div>
+      <div class="card">
+        <img src="img/badge-C.jpg" alt="A glowing arch-shaped rank badge with a brain and the letter C">
+        <h3><span class="num">3.</span> Rank up from E to S</h3>
+        <p>Earn XP every day. Weekly boss challenges: 10 items, then 15, then 20. Missing a day doesn't wipe your progress.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Six ranks. One mind, leveled up.</h2>
+    <p class="lead">Every rank is earned in the app's own fair tests, never bought.</p>
+    <div class="ranks">
+      <img src="img/badge-E.jpg" alt="Rank E badge">
+      <img src="img/badge-D.jpg" alt="Rank D badge">
+      <img src="img/badge-C.jpg" alt="Rank C badge">
+      <img src="img/badge-B.jpg" alt="Rank B badge">
+      <img src="img/badge-A.jpg" alt="Rank A badge">
+      <img src="img/badge-S.jpg" alt="Rank S badge">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap founder">
+    <div>
+      <h2>Heroes are made, not born.</h2>
+      <p class="lead">Our founder can remember 75 digits in a row, using a memory palace with 75 spots. That wasn't a gift. It was learned, with the same method this app teaches.</p>
+      <p class="lead">Most people can hold about 7 digits. The trick isn't a special brain. It's a skill, and skills can be trained.</p>
+      <a class="btn" href="#join">Get early access</a>
+    </div>
+    <!-- Swap in the founder clip once it's filmed: <video src="video/founder.mp4" controls playsinline muted></video> -->
+    <div class="placeholder">Founder video coming soon</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What we promise, and what we don't</h2>
+    <p class="lead">Brain apps have overpromised for years. We'd rather be straight with you.</p>
+    <div class="promise">
+      <div class="card">
+        <h3>What Smart trains</h3>
+        <ul>
+          <li>The memory palace, the method memory champions use</li>
+          <li>The rules behind common IQ-style puzzles</li>
+          <li>A clear goal: 20 items, in order, in 30 days</li>
+          <li>Fair tests: your retest uses brand-new items</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>What it doesn't</h3>
+        <ul>
+          <li>We don't promise your IQ will go up</li>
+          <li>Retaking any test raises scores a little by itself, so we keep ours fair</li>
+          <li>Vocabulary and general knowledge come from reading and school, not from us</li>
+          <li>It isn't medical help. For memory problems from illness, see a doctor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <h2>Join the waitlist</h2>
+    <p class="lead">Be first to try Hero Made Smart. iPhone first.</p>
+    <form id="waitlist" novalidate>
+      <label class="field">Email
+        <input type="email" name="email" required maxlength="200" autocomplete="email" placeholder="you@example.com">
+      </label>
+
+      <fieldset>
+        <legend>What draws you most?</legend>
+        <div class="opts">
+          <label><input type="radio" name="interest" value="memory" required> Memory</label>
+          <label><input type="radio" name="interest" value="puzzles"> IQ-style puzzles</label>
+          <label><input type="radio" name="interest" value="both"> Both</label>
+          <label><input type="radio" name="interest" value="test-prep"> Prepping for a test</label>
+        </div>
+      </fieldset>
+
+      <label class="field">If you're prepping for a test, which one? <span class="small">(optional)</span>
+        <input type="text" name="test_name" maxlength="80" placeholder="For example: an IQ test, a job test">
+      </label>
+
+      <fieldset>
+        <legend>What would you pay for it?</legend>
+        <div class="opts">
+          <label><input type="radio" name="price" value="free" required> Only if free</label>
+          <label><input type="radio" name="price" value="5"> $5/month</label>
+          <label><input type="radio" name="price" value="10"> $10/month</label>
+          <label><input type="radio" name="price" value="15+"> $15+/month</label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>What phone do you use?</legend>
+        <div class="opts">
+          <label><input type="radio" name="phone" value="iphone" required> iPhone</label>
+          <label><input type="radio" name="phone" value="android"> Android</label>
+        </div>
+      </fieldset>
+
+      <label class="check"><input type="checkbox" name="adult" value="yes" required> I'm 18 or older.</label>
+
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div><button class="btn" type="submit">Join the waitlist</button></div>
+      <div id="status" role="status" aria-live="polite"></div>
+      <p class="small">We'll email you about Hero Made Smart's launch, and we may invite a few people to a short chat about the app. Your answers are used only for that. We never sell your answers or share them for advertising. <a href="privacy.html">Privacy notice</a>.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="tag">Hero Made Smart. Heroes are made, not born.</div>
+    <div>A Hero Made Labs app, in development. Contact: <a href="mailto:smart@heromadelabs.com">smart@heromadelabs.com</a> · <a href="privacy.html">Privacy</a></div>
+  </div>
+</footer>
+
+<script>
+  // Set to the Apps Script web app's /exec URL after the owner deploys waitlist/Code.gs.
+  const ENDPOINT = "";
+
+  const form = document.getElementById("waitlist");
+  const status = document.getElementById("status");
+  const ref = new URLSearchParams(location.search).get("ref") || "direct";
+  let justJoined = false;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    // A second click on the emptied form shouldn't replace the success message.
+    if (justJoined && ![...data.values()].some(Boolean)) return;
+    justJoined = false;
+    status.className = "";
+
+    // The same email rule as Code.gs. Browsers accept "name@gmail", the script refuses it, and the page can't read its answer.
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(String(data.get("email")).trim());
+    if (!form.checkValidity() || !emailOk) {
+      status.className = "err";
+      status.textContent = "Please add your email, answer each question and confirm you're 18 or older.";
+      return;
+    }
+    if (!ENDPOINT) {
+      status.className = "err";
+      status.textContent = "The waitlist isn't open yet. Check back soon.";
+      return;
+    }
+
+    const body = new URLSearchParams();
+    for (const key of ["email", "interest", "test_name", "price", "phone", "adult", "website"]) {
+      body.append(key, data.get(key) || "");
+    }
+    body.append("source", ref.slice(0, 60));
+
+    const button = form.querySelector("button");
+    button.disabled = true;
+    status.textContent = "Sending…";
+    try {
+      // A simple form POST avoids a CORS preflight; Apps Script's reply can't always be read, so a
+      // network-level success counts as success.
+      await fetch(ENDPOINT, { method: "POST", body, mode: "no-cors" });
+      form.reset();
+      justJoined = true;
+      status.className = "ok";
+      status.textContent = "You're on the list. Welcome, hero.";
+    } catch (err) {
+      status.className = "err";
+      status.textContent = "Something went wrong. Please try again in a minute.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
