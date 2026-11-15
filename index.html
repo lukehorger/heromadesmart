@@ -150,6 +150,11 @@
   #status { min-height: 24px; font-weight: 600; }
   #status.ok { color: #86efac; }
   #status.err { color: #fca5a5; }
+  [hidden] { display: none !important; }
+  .joined { border: 1px solid #86efac; border-radius: 18px; background: var(--panel); padding: 28px 24px; text-align: center; scroll-margin: 24px; }
+  .joined h3 { color: #86efac; font-size: 24px; margin: 0 0 8px; }
+  .joined p { color: var(--muted); margin: 0; }
+  .joined:focus { outline: none; }
 
   footer { border-top: 1px solid var(--line); padding: 36px 0 48px; color: var(--muted); font-size: 14px; }
   footer .tag { color: var(--text); font-weight: 600; }
@@ -317,6 +322,10 @@
       <div id="status" role="status" aria-live="polite"></div>
       <p class="small">We'll email you about Hero Made Smart's launch, and we may invite a few people to a short chat about the app. Your answers are used only for that. We never sell your answers or share them for advertising. <a href="privacy.html">Privacy notice</a>.</p>
     </form>
+    <div id="joined" class="joined" hidden tabindex="-1" role="status">
+      <h3>You're on the list. Welcome, hero.</h3>
+      <p>We'll email you when Hero Made Smart launches. No need to sign up again.</p>
+    </div>
   </div>
 </section>
 </main>
@@ -334,15 +343,14 @@
 
   const form = document.getElementById("waitlist");
   const status = document.getElementById("status");
+  const joined = document.getElementById("joined");
   const ref = new URLSearchParams(location.search).get("ref") || "direct";
-  let justJoined = false;
+  // On a phone the button can sit at the bottom of the screen, so every message is scrolled into view.
+  const show = (el) => el.scrollIntoView({ behavior: "smooth", block: "center" });
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const data = new FormData(form);
-    // A second click on the emptied form shouldn't replace the success message.
-    if (justJoined && ![...data.values()].some(Boolean)) return;
-    justJoined = false;
     status.className = "";
 
     // The same email rule as Code.gs. Browsers accept "name@gmail", the script refuses it, and the page can't read its answer.
@@ -350,11 +358,13 @@
     if (!form.checkValidity() || !emailOk) {
       status.className = "err";
       status.textContent = "Please add your email, answer each question and confirm you're 18 or older.";
+      show(status);
       return;
     }
     if (!ENDPOINT) {
       status.className = "err";
       status.textContent = "The waitlist isn't open yet. Check back soon.";
+      show(status);
       return;
     }
 
@@ -365,21 +375,27 @@
     body.append("source", ref.slice(0, 60));
 
     const button = form.querySelector("button");
+    if (button.disabled) return;
     button.disabled = true;
-    status.textContent = "Sending…";
+    button.textContent = "Sending…";
+    status.textContent = "";
     try {
       // A simple form POST avoids a CORS preflight; Apps Script's reply can't always be read, so a
       // network-level success counts as success.
       await fetch(ENDPOINT, { method: "POST", body, mode: "no-cors" });
+      // Swap the form for the welcome box in the same spot, so nobody signs up twice.
       form.reset();
-      justJoined = true;
-      status.className = "ok";
-      status.textContent = "You're on the list. Welcome, hero.";
+      form.hidden = true;
+      joined.hidden = false;
+      show(joined);
+      joined.focus({ preventScroll: true });
     } catch (err) {
       status.className = "err";
       status.textContent = "Something went wrong. Please try again in a minute.";
+      show(status);
     } finally {
       button.disabled = false;
+      button.textContent = "Join the waitlist";
     }
   });
 </script>
